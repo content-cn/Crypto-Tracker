@@ -16,7 +16,7 @@
             <a href="index.html" class="nav-link">Home</a>
             <a href="favorite.html" class="nav-link">Liked Coins</a>
             <div class="search-container">
-                <input type="text" id="search-box" placeholder="Search Coins..." autocomplete="off">
+                <input type="text" id="search-box" placeholder="Search Coins..."  autocomplete="off">
                 <i class="fas fa-search" id="search-icon"></i>
                 <div class="dialog-box" id="search-dialog">
                     <div class="dialog-content">
@@ -28,6 +28,9 @@
                     </div>
                 </div>
             </div>
+            <!-- <div id="search-dialog" class="dialog-box" style="display: none;">
+                
+            </div> -->
         </div>
     </nav>
     <main>
@@ -53,11 +56,17 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Table rows will be inserted here dynamically -->
+                <!-- Table content will be inserted here by JavaScript -->
             </tbody>
         </table>
+<!-- // pagination and simmer -->
+  <!-- // pagination and simmer -->
+  <div id="pagination-controls">
+    <button id="prev-button" disabled>Prev</button>
+    <button id="next-button">Next</button>
+</div>
     </main>
-
+   
     <script src="script.js"></script>
 </body>
 </html>

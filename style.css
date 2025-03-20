@@ -177,6 +177,32 @@ tr:hover {
 .favorite-icon.favorite {
     color: gold;
 }
+/* pagination */
+#pagination-controls {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+#pagination-controls button {
+    background-color: #f16222;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#pagination-controls button:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+}
+
+#pagination-controls button:hover:not(:disabled) {
+    background-color: #d4501e;
+}
 
 
 

@@ -1,31 +1,68 @@
 Crypto Tracker
 
-A simple web app to track cryptocurrency prices, view details, and manage favorite coins.
+Crypto Tracker is a web application that enables users to track cryptocurrency prices, view historical trends, and manage their favorite coins.
 
 Features
 
-View top cryptocurrencies with prices, market cap, and volume.
+1. Live Cryptocurrency Tracking
 
-Search and filter coins.
+Displays real-time prices, market caps, and trading volumes of top cryptocurrencies.
 
-View individual coin details and price charts.
+Fetches data using the CoinGecko API.
 
-Save favorite coins locally.
+2. Search and Filtering
 
-Tech Stack
+Users can search for specific cryptocurrencies.
 
-HTML, CSS, JavaScript
+Sorting options by price, volume, and market cap.
 
-CoinGecko API
+3. Coin Details Page
 
-LocalStorage
+Detailed view for each cryptocurrency, including:
 
-Usage
+Rank, current price, and market cap.
 
-Clone the repo:
+A historical price chart with selectable timeframes (24h, 30d, 3m).
 
-Open index.html in a browser.
+4. Favorites Management
+
+Users can add or remove coins from their favorites list.
+
+Favorites are stored in LocalStorage for persistence.
+
+5. Pagination
+
+Users can navigate between pages of cryptocurrency listings.
+
+Technologies Used
+
+HTML, CSS, JavaScript: Frontend structure and styling.
+
+Chart.js: For rendering historical price charts.
+
+CoinGecko API: Fetching real-time cryptocurrency data.
+
+LocalStorage: Managing the user's favorite coins.
+
+Project Structure
+
+Installation & Usage
+
+Clone the repository:
+
+Navigate to the project folder:
+
+Open index.html in a web browser.
 
 API Integration
 
-Replace 'YOUR-API-KEY' in script.js with a valid CoinGecko API key.
+This project uses the CoinGecko API to fetch cryptocurrency data. The API key is required in script.js and coin.js:
+
+Replace 'YOUR-API-KEY' with a valid API key from CoinGecko.
+
+Future Improvements
+
+Implement user authentication for personalized favorites.
+
+Add real-time price updates.
+
