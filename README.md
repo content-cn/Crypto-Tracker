@@ -1,12 +1,45 @@
 ### Objective
-The goal of this project is to develop a cryptocurrency tracker web application using vanilla JavaScript, HTML, CSS, and Chart.js. The application will display the top cryptocurrencies by market cap, and provide detailed information and historical price charts for each cryptocurrency. On the home page when a user clicks the name of a crypto coin, a new page should open about that particular coin. In this page we will have the details of the coin and a chart which will depict price variation of the coin in last 24 hr, in last 30 days and in last 3 months.
+Crypto Tracker
 
-### Tasks
-## Home Page Development
+Crypto Tracker is a web application that allows users to track the latest cryptocurrency prices, view details of individual coins, and manage a list of favorite coins.
 
-Create a home page that displays the top 10 cryptocurrencies by market cap.
-Each cryptocurrency entry should include: position, icon, name, current price, 24h volume, and market cap.
-Implement a responsive design that adapts to different screen sizes, including mobile view.
+Features
+
+Display a list of top cryptocurrencies with their current prices, market caps, and 24h volume.
+
+Search for specific cryptocurrencies.
+
+View detailed information and historical price charts for each cryptocurrency.
+
+Add or remove coins from the favorites list.
+
+Sort coins based on price, market cap, and volume.
+
+Technologies Used
+
+HTML, CSS, JavaScript: Core front-end technologies.
+
+Chart.js: For displaying historical price charts.
+
+CoinGecko API: Fetching cryptocurrency data.
+
+LocalStorage: Managing favorite coins.
+
+Project Structure
+
+Installation & Usage
+
+Clone the repository:
+
+Navigate to the project folder:
+
+Open index.html in a web browser.
+
+API Integration
+
+This project uses the CoinGecko API to fetch cryptocurrency data. The API key is required in script.js and coin.js:
+
+Replace 'YOUR-API-KEY' with a valid API key from CoinGecko.
 ## Fetch Data from CoinGecko API
 
 Use the CoinGecko API to fetch the list of top cryptocurrencies by market cap.

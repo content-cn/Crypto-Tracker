@@ -18,18 +18,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     const coinMarketCap = document.getElementById('coin-market-cap');
     const addToFavBtn = document.getElementById('add-to-fav-btn');
 
-    const showShimmer = () => {
-        shimmerContainer.style.display = 'flex';
-        coinContainer.style.display = 'none';
-    };
+    // const showShimmer = () => {
+    //     shimmerContainer.style.display = 'flex';
+    //     coinContainer.style.display = 'none';
+    // };
 
-    const hideShimmer = () => {
-        shimmerContainer.style.display = 'none';
-        coinContainer.style.display = 'flex';
-    };
+    // const hideShimmer = () => {
+    //     shimmerContainer.style.display = 'none';
+    //     coinContainer.style.display = 'flex';
+    // };
 
     async function fetchCoinData() {
-        showShimmer(); // Show shimmer effect before fetching data
+        // showShimmer();
         try {
             const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`, options);
             const data = await response.json();
@@ -37,55 +37,51 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {
-            hideShimmer(); // Hide shimmer effect after data is fetched
+            // hideShimmer();
         }
     }
 
     function displayCoinData(coin) {
+        if (!coin || !coin.market_data || !coin.image) {
+            coinContainer.innerHTML = '<p style="color: red;">Invalid coin data received.</p>';
+            return;
+        }
+
         coinImage.src = coin.image.large;
         coinImage.alt = coin.name;
         coinName.textContent = coin.name;
-        coinDescription.innerHTML = coin.description.en.split(". ")[0] + '.';
-        coinRank.textContent = coin.market_cap_rank;
-        coinPrice.textContent = `$${coin.market_data.current_price.usd.toLocaleString()}`;
-        coinMarketCap.textContent = `$${coin.market_data.market_cap.usd.toLocaleString()}`;
+        coinDescription.innerHTML = coin.description.en ? coin.description.en.split(". ")[0] + '.' : 'No description available.';
+        coinRank.textContent = coin.market_cap_rank || 'N/A';
+        coinPrice.textContent = coin.market_data.current_price.usd ? `$${coin.market_data.current_price.usd.toLocaleString()}` : 'N/A';
+        coinMarketCap.textContent = coin.market_data.market_cap.usd ? `$${coin.market_data.market_cap.usd.toLocaleString()}` : 'N/A';
 
-        // Check if the coin is in favorites and update button text
-        const favorites = getFavorites();
-        if (favorites.includes(coinId)) {
-            addToFavBtn.textContent = 'Remove from Favorites';
-        } else {
-            addToFavBtn.textContent = 'Add to Favorites';
-        }
+        updateFavoriteButton();
     }
 
-    // Retrieve favorites from localStorage
+    // Favorites Functions
     const getFavorites = () => JSON.parse(localStorage.getItem('favorites')) || [];
-
-    // Save favorites to localStorage
-    const saveFavorites = (favorites) => localStorage.setItem('favorites', JSON.stringify(favorites));
-
-    // Handle favorite button click
-    const handleFavoriteClick = () => {
-        const favorites = toggleFavorite(coinId);
-        saveFavorites(favorites);
-        // Update button text after toggling favorite status
-        addToFavBtn.textContent = favorites.includes(coinId) ? 'Remove from Favorites' : 'Add to Favorites';
-    };
-
-    // Toggle favorite status
-    const toggleFavorite = (coinId) => {
+    
+    const toggleFavorite = () => {
         let favorites = getFavorites();
         if (favorites.includes(coinId)) {
             favorites = favorites.filter(id => id !== coinId);
         } else {
             favorites.push(coinId);
         }
-        return favorites;
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        updateFavoriteButton();
     };
+
+    const updateFavoriteButton = () => {
+        const favorites = getFavorites();
+        addToFavBtn.textContent = favorites.includes(coinId) ? 'Remove from Favorites' : 'Add to Favorites';
+    };
+
+    addToFavBtn.addEventListener('click', toggleFavorite);
 
     await fetchCoinData();
 
+    // Chart.js Integration
     const ctx = document.getElementById('coinChart').getContext('2d');
     let coinChart = new Chart(ctx, {
         type: 'line',
@@ -95,18 +91,23 @@ document.addEventListener('DOMContentLoaded', async () => {
                 label: 'Price (USD)',
                 data: [],
                 borderColor: '#EEBC1D',
-                fill: false,
+                backgroundColor: 'rgba(238, 188, 29, 0.2)',
+                fill: true,
+                borderWidth: 2,
+                pointRadius: 3
             }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 x: {
-                    display: true,
+                    grid: { display: false },
+                    title: { display: true, text: 'Date' }
                 },
                 y: {
-                    display: true,
                     beginAtZero: false,
+                    title: { display: true, text: 'Price (USD)' },
                     ticks: {
                         callback: function(value) {
                             return `$${value}`;
@@ -158,9 +159,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    // Fetch default chart data for 24h
     document.getElementById('24h').click();
-
-    // Add event listener for the "Add to Favorites" button
-    addToFavBtn.addEventListener('click', handleFavoriteClick);
 });
