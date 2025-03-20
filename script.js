@@ -8,27 +8,54 @@ const options = {
 };
 
 // State variables
-let coins = []; // Array to store coin data
-let currentPage = 1; // Current page number for pagination
+let coins = []; // Store coin data
+let currentPage = 1; // Page tracking
 
-// Fetch coins from API (Class 2 functionality)
+// Fetch coins from API
 const fetchCoins = async (page = 1) => {
     try {
         const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=${page}`, options);
         coins = await response.json();
     } catch (err) {
-        console.error(err);
+        console.error("Error fetching data:", err);
     }
     return coins;
 };
 
-// Retrieve favorites from localStorage (for star icon display)
+// Retrieve favorites from localStorage
 const getFavorites = () => JSON.parse(localStorage.getItem('favorites')) || [];
 
-// Render a single coin row (with favorite star icon)
+// Save favorites to localStorage
+const saveFavorites = (favorites) => localStorage.setItem('favorites', JSON.stringify(favorites));
+
+// Toggle favorite status
+const toggleFavorite = (coinId) => {
+    let favorites = getFavorites();
+    
+    if (favorites.includes(coinId)) {
+        favorites = favorites.filter(id => id !== coinId);
+    } else {
+        favorites.push(coinId);
+    }
+    
+    saveFavorites(favorites);
+    return favorites;
+};
+
+// Handle favorite icon click
+const handleFavoriteClick = (coinId, iconElement) => {
+    const favorites = toggleFavorite(coinId);
+    iconElement.classList.toggle('favorite', favorites.includes(coinId));
+};
+
+// Render a single coin row (entire row is clickable)
 const renderCoinRow = (coin, index, start, favorites) => {
     const isFavorite = favorites.includes(coin.id);
     const row = document.createElement('tr');
+
+    // Add a data-id attribute to the row itself
+    row.setAttribute('data-id', coin.id);
+    row.classList.add('coin-row');
     row.innerHTML = `
         <td>${start + index}</td>
         <td><img src="${coin.image}" alt="${coin.name}" width="24" height="24" /></td>
@@ -40,10 +67,11 @@ const renderCoinRow = (coin, index, start, favorites) => {
             <i class="fas fa-star favorite-icon ${isFavorite ? 'favorite' : ''}" data-id="${coin.id}"></i>
         </td>
     `;
+
     return row;
 };
 
-// Render coins (Class 2 functionality)
+// Render coins
 const renderCoins = (coinsToDisplay, page, itemsPerPage) => {
     const start = (page - 1) * itemsPerPage + 1;
     const favorites = getFavorites();
@@ -62,7 +90,7 @@ const renderCoins = (coinsToDisplay, page, itemsPerPage) => {
     });
 };
 
-// Initialize the page (Class 2 functionality)
+// Initialize the page
 const initializePage = async () => {
     coins = await fetchCoins(currentPage);
     
@@ -74,5 +102,22 @@ const initializePage = async () => {
     renderCoins(coins, currentPage, 25);
 };
 
-// Event listener to load data on page load (Class 2 functionality)
+// Attach event listeners for dynamic elements (Event Delegation)
+document.addEventListener('click', (event) => {
+    // Handle favorite icon click (Prevent row click event)
+    if (event.target.classList.contains('favorite-icon')) {
+        event.stopPropagation(); // Prevent row click event
+        const coinId = event.target.dataset.id;
+        handleFavoriteClick(coinId, event.target);
+    }
+    
+    // Handle row click (Navigates to coin details page)
+    const row = event.target.closest('.coin-row'); // Get closest row element
+    if (row && !event.target.classList.contains('favorite-icon')) {
+        const coinId = row.getAttribute('data-id');
+        window.location.href = `coin.html?id=${coinId}`;
+    }
+});
+
+// Load data on page load
 document.addEventListener('DOMContentLoaded', initializePage);

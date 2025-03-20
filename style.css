@@ -161,6 +161,25 @@ tr:hover {
     cursor: pointer;
 }
 
+.favorite-icon {
+    color: gray;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+
+/* favorite styling */
+.favorite-icon {
+    cursor: pointer;
+}
+
+.favorite-icon:hover,
+.favorite-icon.favorite {
+    color: gold;
+}
+
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
     header {

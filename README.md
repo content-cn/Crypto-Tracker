@@ -1,39 +1,31 @@
 Crypto Tracker
 
-Crypto Tracker is a web application that allows users to track the latest cryptocurrency prices, view details of individual coins, and manage a list of favorite coins.
+A simple web app to track cryptocurrency prices, view details, and manage favorite coins.
 
 Features
 
-Display a list of top cryptocurrencies with their current prices, market caps, and 24h volume.
+View top cryptocurrencies with prices, market cap, and volume.
 
-Search for specific cryptocurrencies.
+Search and filter coins.
 
-View detailed information and historical price charts for each cryptocurrency.
+View individual coin details and price charts.
 
-Add or remove coins from the favorites list.
+Save favorite coins locally.
 
-Sort coins based on price, market cap, and volume.
+Tech Stack
 
-Technologies Used
+HTML, CSS, JavaScript
 
-HTML, CSS, JavaScript: Core front-end technologies.
+CoinGecko API
 
-CoinGecko API: Fetching cryptocurrency data.
+LocalStorage
 
-LocalStorage: Managing favorite coins.
+Usage
 
-Project Structure
+Clone the repo:
 
-Installation & Usage
-
-Clone the repository:
-
-Navigate to the project folder:
-
-Open index.html in a web browser.
+Open index.html in a browser.
 
 API Integration
 
-This project uses the CoinGecko API to fetch cryptocurrency data. The API key is required in script.js:
-
-Replace 'YOUR-API-KEY' with a valid API key from CoinGecko.
+Replace 'YOUR-API-KEY' in script.js with a valid CoinGecko API key.
