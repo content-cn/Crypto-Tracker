@@ -17,7 +17,8 @@ const itemsPerPage = 25; // Number of items per page
 // Fetch coins from API
 const fetchCoins = async (page = 1) => {
     try {
-        const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${itemsPerPage}&page=${page}`, options);        coins = await response.json();
+        const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${itemsPerPage}&page=${page}`, options);        
+        coins = await response.json();
     } catch (err) {
         console.error("Error fetching data:", err);
     }
@@ -164,18 +165,14 @@ if(document.querySelector('#prev-button') && document.querySelector('#next-butto
 // document.querySelector('#prev-button').addEventListener('click', handlePrevButtonClick);
 // document.querySelector('#next-button').addEventListener('click', handleNextButtonClick);
 
-
-
-
-
-
-// Debounce function
-let debounceTimeout;
+//debounce function that returns a debounced version
 const debounce = (func, delay) => {
-    clearTimeout(debounceTimeout);
-    debounceTimeout = setTimeout(func, delay);
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+    };
 };
-
 
 // Fetch search results from API
 const fetchSearchResults = async (query) => {
@@ -230,24 +227,19 @@ const closeSearchDialog = () => {
 };
 
 
-// Handle search input with debounce
-const handleSearchInput = () => {
-    debounce(async () => {
-        const searchTerm = document.querySelector('#search-box').value.trim();
-        if (searchTerm) {
-            const results = await fetchSearchResults(searchTerm);
-            showSearchResults(results);
-        } else {
-            closeSearchDialog();
-        }
-    }, 300);
-};
+// Debounced search logic
+const handleSearchInput = debounce(async () => {
+    const searchTerm = document.querySelector('#search-box').value.trim();
+    if (searchTerm) {
+        const results = await fetchSearchResults(searchTerm);
+        showSearchResults(results);
+    } else {
+        closeSearchDialog();
+    }
+}, 300);
 
-
-// Attach event listeners
+// Event listeners
 document.addEventListener('DOMContentLoaded', initializePage);
 document.querySelector('#search-box').addEventListener('input', handleSearchInput);
 document.querySelector('#search-icon').addEventListener('click', handleSearchInput);
 document.querySelector('#close-dialog').addEventListener('click', closeSearchDialog);
-
-
