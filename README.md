@@ -32,7 +32,6 @@ Crypto Tracker is a web application that allows users to track the latest crypto
 
 ## Project Structure
 Crypto-Tracker/
-│
 ├── index.html          
 ├── coin.html           
 ├── favorite.html       
@@ -60,3 +59,31 @@ An API key is required in `script.js` and `coin.js`. Replace `'YOUR-API-KEY'` wi
 #### Home Page:
 
 - **Endpoint**:
+```bash
+https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false
+```
+- **Purpose**: Fetches the top 10 cryptocurrencies by market cap to display on the home page.
+
+#### Coin Detail Page:
+
+- **Endpoint**:
+```bash
+https://api.coingecko.com/api/v3/coins/{id}
+```
+- **Purpose**: Fetches detailed information about a specific cryptocurrency using its unique ID.
+
+#### Historical Price Chart:
+
+- **Endpoint**:
+```bash
+https://api.coingecko.com/api/v3/coins/{id}/market_chart?vs_currency=usd&days={days}
+```
+- **Purpose**: Fetches historical price data for a specific cryptocurrency over a specified period (24 hours, 30 days, or 3 months) to display on the coin detail page.
+
+## Responsive and Interactive UI
+
+- Ensure the application is fully responsive, providing a good user experience on both desktop and mobile devices.
+
+- Highlight the active time period button in the chart section to indicate the current view.
+
+- Implement navigation features such as a home button in the navbar for easy access back to the home page.
