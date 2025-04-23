@@ -80,10 +80,14 @@ https://api.coingecko.com/api/v3/coins/{id}/market_chart?vs_currency=usd&days={d
 ```
 - **Purpose**: Fetches historical price data for a specific cryptocurrency over a specified period (24 hours, 30 days, or 3 months) to display on the coin detail page.
 
-## Responsive and Interactive UI
+### Responsive and Interactive UI
 
 - Ensure the application is fully responsive, providing a good user experience on both desktop and mobile devices.
 
 - Highlight the active time period button in the chart section to indicate the current view.
 
 - Implement navigation features such as a home button in the navbar for easy access back to the home page.
+###  **Deployment & Cloud Integration**
+- **Deployment on Vercel/Netlify**: The app is deployed on cloud platforms like **Vercel** or **Netlify** for live hosting and easy access.
+- **GitHub Integration**: The source code is hosted on **GitHub** for version control and collaboration.
+- **QR Code Generation**: Generates a **QR code** for easy access to the live website, making it mobile-friendly.
