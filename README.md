@@ -33,16 +33,30 @@ Crypto Tracker is a web application that allows users to track the latest crypto
 ## Project Structure
 Crypto-Tracker/
 │
-├── index.html          # Main landing page
-├── coin.html           # Detailed view for individual coins
-├── favorite.html       # Page to view favorite coins
-├── script.js           # Main JavaScript file for functionality
-├── coin.js             # JavaScript file for coin-specific functions
-├── style.css           # Main CSS file for styling
-├── coin.css            # Additional CSS for coin details
-└── .vscode/            # Visual Studio Code settings
+├── index.html          
+├── coin.html           
+├── favorite.html       
+├── script.js           
+├── coin.js             
+├── style.css          
+├── coin.css           
+└── .vscode/            
 ## Installation & Usage
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/content-cn/Crypto-Tracker.git
+   ```
+## API Integration
+
+This project uses the CoinGecko API to fetch cryptocurrency data.
+
+### API Key
+
+An API key is required in `script.js` and `coin.js`. Replace `'YOUR-API-KEY'` with a valid API key from CoinGecko.
+
+### Fetch Data from CoinGecko API
+
+#### Home Page:
+
+- **Endpoint**:
