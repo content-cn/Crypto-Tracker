@@ -31,8 +31,16 @@ Crypto Tracker is a web application that allows users to track the latest crypto
 - **LocalStorage**: For managing the list of favorite coins.
 
 ## Project Structure
-Crypto-Tracker/ │ ├── index.html # Main landing page ├── coin.html # Detailed view for individual coins ├── favorite.html # Page to view favorite coins ├── script.js # Main JavaScript file for functionality ├── coin.js # JavaScript file for coin-specific functions ├── style.css # Main CSS file for styling ├── coin.css # Additional CSS for coin details └── .vscode/ # Visual Studio Code settings
-
+Crypto-Tracker/
+│
+├── index.html          # Main landing page
+├── coin.html           # Detailed view for individual coins
+├── favorite.html       # Page to view favorite coins
+├── script.js           # Main JavaScript file for functionality
+├── coin.js             # JavaScript file for coin-specific functions
+├── style.css           # Main CSS file for styling
+├── coin.css            # Additional CSS for coin details
+└── .vscode/            # Visual Studio Code settings
 ## Installation & Usage
 
 1. Clone the repository:
