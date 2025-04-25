@@ -93,4 +93,4 @@ https://api.coingecko.com/api/v3/coins/{id}/market_chart?vs_currency=usd&days={d
 ###  **Deployment & Cloud Integration**
 - **Deployment on Vercel/Netlify**: The app is deployed on cloud platforms like **Vercel** or **Netlify** for live hosting and easy access.
 - **GitHub Integration**: The source code is hosted on **GitHub** for version control and collaboration.
-- **QR Code Generation**: Generates a **QR code** for easy access to the live website, making it mobile-friendly.
+
